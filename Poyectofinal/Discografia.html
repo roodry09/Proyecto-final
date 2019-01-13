@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">  
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+     <script type="text/javascript" src="https://e-cdns-files.dzcdn.net/js/min/dz-v00400640.js" defer="true"></script>
+     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+		<title>Discografia</title>
+</head>
+<body class="disco-graphy">
+
+<nav class="navbar navbar-expand-lg navbar-light" >
+  <a class="navbar-brand" href="../Poyectofinal/index.html">
+              <img src="../Poyectofinal/images/Logo1min.png" alt="">
+</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="material-icons">
+list
+</i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Historia.html">Historia</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="Discografia.html">Discografia</a>
+      </li>
+         <li class="nav-item">
+                <li class="nav-item">
+        <a class="nav-link" href="Libros.html">Libros</a>
+      </li>
+         <li class="nav-item">
+        <a class="nav-link" href="Contact.html">Contacto</a>
+      </li>
+      
+      </ul>
+
+  </div>
+</nav>
+
+      <div class="galeria">
+        <h1>Discografia</h1>
+            <div class="contenedor-imagenes">
+            <div class="imagen">
+                <img src="Disc/Atlantida.jpg" alt="">
+                <div class="overlay">
+                    <h2>Atlantida</h2>
+                </div>
+            </div>
+            <div class="imagen">
+                <img src="Disc/Elepitafiodepandora.jpg" alt="">
+                <div class="overlay">
+                    <h2>El epitafio de pandora</h2>
+                </div>
+            </div>
+            <div class="imagen">
+                <img  src="Disc/Pandora.jpg" alt="">
+                <div class="overlay">
+                    <h2>Pandora</h2>
+                </div>
+            </div>
+            <div class="imagen">
+                <img src="Disc/Theroad.jpg" alt="">
+                <div class="overlay">
+                    <h2>The road</h2>
+                </div>
+            </div>
+            <div class="imagen">
+                <img  src="Disc/Miradaseternas.jpg" alt="">
+                <div class="overlay">
+                    <h2>Miradas Eternas </h2>
+                </div>
+            </div>
+            <div class="imagen">
+                <img src="Disc/Fantasia.jpg" alt="">
+                <div class="overlay">
+                    <h2>Fantasia</h2>
+                </div>
+            </div>
+
+            <div class="imagen">
+                <img src="Disc/Altafrecuencia.jpg" alt="">
+                <div class="overlay">
+                    <h2>Alta frecuencia</h2>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+    
+       <h4>Escucha la discografia gratis.</h4>
+    <hr>
+    <div id="controlers">
+
+        
+<input type="button" onclick="DZ.player.playAlbum(78245302); return false;" value="Atlantida"/>
+<input type="button" onclick="DZ.player.playAlbum(42782441); return false;" value="El epitafio de pandora"/>
+<input type="button" onclick="DZ.player.playAlbum(45069321); return false;" value="Pandora"/>
+<input type="button" onclick="DZ.player.playAlbum(45069371); return false;" value="The Road"/>
+<input type="button" onclick="DZ.player.playAlbum(45069381); return false;" value="Miradas Eternas"/>
+<input type="button" onclick="DZ.player.playAlbum(45069391); return false;" value="Fantasia"/>
+<input type="button" onclick="DZ.player.playAlbum(50958422); return false;" value="Alta frecuencia"/>
+
+    <br/><br/><br/>
+</div>
+<div id="dz-root"></div>
+<div id="player" style="width:100%;" align="center"></div>
+<br/>
+
+
+    
+           <div class="footer-copyright text-center py-3">© Todos los derechos reservados.
+:
+      <a href="https://www.youtube.com/channel/UCrjO8bvh62lwAz2atQjakbw"> OficialXenonZone
+</a>
+    </div>
+
+
+
+</body>
+    <script>
+    $(document).ready(function(){
+        $("#controlers input").attr('disabled', true);
+        $("#slider_seek").click(function(evt,arg){
+            var left = evt.offsetX;
+            DZ.player.seek((evt.offsetX/$(this).width()) * 100);
+        });
+    });
+    function event_listener_append() {
+        var pre = document.getElementById('event_listener');
+        var line = [];
+        for (var i = 0; i < arguments.length; i++) {
+            line.push(arguments[i]);
+        }
+        pre.innerHTML += line.join(' ') + "\n";
+    }
+    function onPlayerLoaded() {
+        $("#controlers input").attr('disabled', false);
+        event_listener_append('player_loaded');
+        DZ.Event.subscribe('current_track', function(arg){
+            event_listener_append('current_track', arg.index, arg.track.title, arg.track.album.title);
+        });
+        DZ.Event.subscribe('player_position', function(arg){
+            event_listener_append('position', arg[0], arg[1]);
+            $("#slider_seek").find('.bar').css('width', (100*arg[0]/arg[1]) + '%');
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        DZ.init({
+            appId  : '8',
+            channelUrl : 'https://developers.deezer.com/examples/channel.php',
+            player : {
+                container : 'player',
+                playlist : true,
+                width : 650,
+                height : 300,
+                onload : onPlayerLoaded
+            }
+        });
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+	<script src="scripts/scripts.js" ></script>
+    
+</html>
